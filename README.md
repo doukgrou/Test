@@ -6,3 +6,7 @@ npm install bcryptjs body-parser concurrently express is-empty jsonwebtoken mong
 
 npm i -D nodemon
 
+cd client
+
+npm install
+
