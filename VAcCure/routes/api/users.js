@@ -31,7 +31,10 @@ router.post("/register", (req, res) => {
     } else {
       const newUser = new User({
         hospitalName: req.body.hospitalName,
-        location: req.body.location,
+        address: req.body.address,
+        city: req.body.city,
+        country: req.body.country,
+        phone: req.body.phone,
         email: req.body.email,
         username: req.body.username,
         password: req.body.password
@@ -65,14 +68,14 @@ router.post("/login", (req, res) => {
     return res.status(400).json(errors);
   }
 
-  const email = req.body.email;
+  const username = req.body.username;
   const password = req.body.password;
 
-  // Find user by email
-  User.findOne({ email }).then(user => {
+  // Find user by username
+  User.findOne({ username }).then(user => {
     // Check if user exists
     if (!user) {
-      return res.status(404).json({ emailnotfound: "Email not found" });
+      return res.status(404).json({ usernamenotfound: "username or Password is incorrect" });
     }
 
     // Check password
@@ -82,31 +85,41 @@ router.post("/login", (req, res) => {
         // Create JWT Payload
         const payload = {
           id: user.id,
-          hospitalName: user.hospitalName,
-          location: user.location
+          hospitalName: user.hospitalName
         };
 
         // Sign token
-        jwt.sign(
-          payload,
-          keys.secretOrKey,
-          {
-            expiresIn: 31556926 // 1 year in seconds
-          },
-          (err, token) => {
-            res.json({
-              success: true,
-              token: "Bearer " + token
-            });
-          }
-        );
-      } else {
-        return res
-          .status(400)
-          .json({ passwordincorrect: "Password incorrect" });
+        jwt.sign(payload, keys.secretOrKey, {expiresIn: 31556926 }, (err, token) => {
+            res.json({success: true, token: "Bearer " + token});
+        });
+        
       }
+      else return res.status(400).json({ passwordincorrect: "username or Password is incorrect" });
+      
     });
   });
+});
+
+router.get("/profile", (req, res) => {
+  const username = req.body.username
+  User.findOne({ username }).then(user => {
+    if (!user) {
+      return res.status(404).json({ usernamenotfound: "error" });
+    }
+
+    res.json(
+            {
+              hospitalName: user.hospitalName,
+              address: user.address,
+              city: user.city, 
+              country: user.country,
+              phone: user.phone,
+              email: user.email
+            })
+  });
+
+  
+
 });
 
 module.exports = router;
