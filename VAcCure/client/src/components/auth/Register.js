@@ -10,7 +10,10 @@ class Register extends Component {
     super();
     this.state = {
       hospitalName: "",
-      location : "",
+      address : "",
+      city : "",
+      country : "",
+      phone : "",
       email: "",
       username: "",
       password: "",
@@ -43,8 +46,11 @@ class Register extends Component {
 
     const newUser = {
       hospitalName: this.state.hospitalName,
+      address: this.state.address,
+      city: this.state.city, 
+      country: this.state.country, 
+      phone: this.state.phone,
       email: this.state.email,
-      location: this.state.location, 
       username: this.state.username,
       password: this.state.password,
       password2: this.state.password2
@@ -90,16 +96,58 @@ class Register extends Component {
               <div className="input-field col s12">
                 <input
                   onChange={this.onChange}
-                  value={this.state.location}
-                  error={errors.location}
-                  id="location"
+                  value={this.state.address}
+                  error={errors.address}
+                  id="address"
                   type="text"
                   className={classnames("", {
-                    invalid: errors.location
+                    invalid: errors.address
                   })}
                 />
-                <label htmlFor="location">Location</label>
-                <span className="red-text">{errors.location}</span>
+                <label htmlFor="address">Address</label>
+                <span className="red-text">{errors.address}</span>
+              </div>
+              <div className="input-field col s12">
+                <input
+                  onChange={this.onChange}
+                  value={this.state.city}
+                  error={errors.city}
+                  id="city"
+                  type="text"
+                  className={classnames("", {
+                    invalid: errors.city
+                  })}
+                />
+                <label htmlFor="city">City</label>
+                <span className="red-text">{errors.city}</span>
+              </div>
+              <div className="input-field col s12">
+                <input
+                  onChange={this.onChange}
+                  value={this.state.country}
+                  error={errors.country}
+                  id="country"
+                  type="text"
+                  className={classnames("", {
+                    invalid: errors.country
+                  })}
+                />
+                <label htmlFor="country">Country</label>
+                <span className="red-text">{errors.country}</span>
+              </div>
+              <div className="input-field col s12">
+                <input
+                  onChange={this.onChange}
+                  value={this.state.phone}
+                  error={errors.phone}
+                  id="phone"
+                  type="text"
+                  className={classnames("", {
+                    invalid: errors.phone
+                  })}
+                />
+                <label htmlFor="phone">Phone</label>
+                <span className="red-text">{errors.phone}</span>
               </div>
               <div className="input-field col s12">
                 <input
