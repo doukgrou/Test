@@ -11,9 +11,10 @@ class Dashboard extends Component {
 
   render() {
     const { user } = this.props.auth;
-
+    
     return (
       <div style={{ height: "75vh" }} className="container valign-wrapper">
+      <b>Hey there,</b> {user.email.split()}
         <div className="row">
           <div className="col s12 center-align">
           <br /> 
