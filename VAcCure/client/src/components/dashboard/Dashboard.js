@@ -15,14 +15,72 @@ class Dashboard extends Component {
     return (
       <div style={{ height: "75vh" }} className="container valign-wrapper">
         <div className="row">
-          <div className="landing-copy col s12 center-align">
-            <h4>
-              <b>Hey there,</b> {user.hospitalName.split(" ")[0]}
-              <p className="flow-text grey-text text-darken-1">
-                You are logged into a full-stack{" "}
-                <span style={{ fontFamily: "monospace" }}>VAcCure</span> app 👏
-              </p>
-            </h4>
+          <div className="col s12 center-align">
+          <br /> 
+          <br /> 
+          <br /> 
+          <br /> 
+          <br /> 
+          <br /> 
+          <br /> 
+          <br /> 
+          <br /> 
+          <br /> 
+            <p>
+              <b>Number of Vaccines for the day</b>
+              <br />
+              <b>Number of Vaccines for the week</b> 
+              <br />
+            </p>
+            </div>
+            <div>
+            <h4>Vaccinations on 25/04/2021</h4>            
+            <table class="table">
+    <thead>
+      <tr>
+        <th>No:</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>AMKA</th>
+        <th>Age</th>
+        <th>Dose 1</th>
+        <th>Dose 2</th>
+        <th>Stage Of Vaccination</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Lora</td>
+        <td>Smith</td>
+        <td>6887</td>
+        <td>60</td>
+        <td>Yes</td>
+        <td>No</td>
+        <td>Semicompleted</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Christine</td>
+        <td>Edward</td>
+        <td>4787</td>
+        <td>70</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Completed</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>John</td>
+        <td>Lewis</td>
+        <td>5767</td>
+        <td>50</td>
+        <td>No</td>
+        <td>No</td>
+        <td>Uncompleted</td>
+      </tr>
+    </tbody>
+  </table>
             <button
               style={{
                 width: "150px",
