@@ -25,9 +25,9 @@ router.post("/register", (req, res) => {
     return res.status(400).json(errors);
   }
 
-  User.findOne({ username: req.body.username }).then(user => {
+  User.findOne({ username: req.body.email }).then(user => {
     if (user) {
-      return res.status(400).json({ username: "Username already exists" });
+      return res.status(400).json({ email: "Username already exists" });
     }
   });
 
@@ -92,7 +92,13 @@ router.post("/login", (req, res) => {
         // Create JWT Payload
         const payload = {
           id: user.id,
-          hospitalName: user.hospitalName
+          hospitalName: user.hospitalName,
+          address: user.address,
+          city: user.city,
+          country: user.country,
+          phone: user.phone,
+          email: user.email
+          
         };
 
         // Sign token
@@ -107,14 +113,14 @@ router.post("/login", (req, res) => {
   });
 });
 
-router.get("/profile", (req, res) => {
-  const username = req.body.username
+router.get("/dashboard", (req, res) => {
+  const username = req.body.username;
   User.findOne({ username }).then(user => {
     if (!user) {
       return res.status(404).json({ usernamenotfound: "error" });
     }
 
-    res.json(
+    return res.json(
             {
               hospitalName: user.hospitalName,
               address: user.address,
@@ -124,9 +130,6 @@ router.get("/profile", (req, res) => {
               email: user.email
             })
   });
-
-  
-
 });
 
 module.exports = router;
