@@ -28,20 +28,26 @@ class Dashboard extends Component {
           <br /> 
 
           <b>Hospital Name:</b>            {user.hospitalName.split()}<br /> 
-          <b>The hospital is placed at</b> {user.address.split()}
-                                           {user.city.split()}
-                                            {user.country.split()}<br />
+          <b>The hospital is placed at: </b>{user.address.split()}   
+                                            , {user.city.split()}    
+                                            , {user.country.split()}<br />
           <b>Phone:</b>                    {user.phone.split()}<br /> 
           <b>email:</b>                    {user.email.split()}<br /> 
 
+          <hr></hr>
             <p>
-              <b>Number of Vaccines for the day</b>
+              <b>Number of Vaccines for the day:</b>     1300
               <br />
-              <b>Number of Vaccines for the week</b> 
+              <b>Number of Vaccines for the week:</b>     150
               <br />
             </p>
-            </div>
-            <div>
+            <br /> 
+            <br /> 
+            <br /> 
+            <br /> 
+            <br />
+        </div>
+      <div>
             <h4>Vaccinations on 25/04/2021</h4>            
             <table class="table">
     <thead>
