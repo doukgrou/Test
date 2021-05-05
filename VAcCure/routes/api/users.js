@@ -16,26 +16,25 @@ const User = require("../../models/User");
 // @desc Register user
 // @access Public
 router.post("/register", (req, res) => {
-  // Form validation
-
+  
+// Form validation
   const { errors, isValid } = validateRegisterInput(req.body);
 
-  // Check validation
+// Check validation
   if (!isValid) {
     return res.status(400).json(errors);
   }
-
-  User.findOne({ username: req.body.email }).then(user => {
+  
+  User.findOne({ username: req.body.username }).then(user => {
     if (user) {
-      return res.status(400).json({ email: "Username already exists" });
+      return res.status(400).json({ username: "Username already exists" });
     }
   });
-
+  
   User.findOne({ email: req.body.email }).then(user => {
     if (user) {
       return res.status(400).json({ email: "Email already exists" });
-    }
-    else {
+    } else {
       const newUser = new User({
         hospitalName: req.body.hospitalName,
         address: req.body.address,
@@ -116,14 +115,12 @@ router.post("/login", (req, res) => {
 
 // @route GET /profile
 router.get("/dashboard", (req, res) => {
-  const username = req.body.username;
+  const username = req.body.username
   User.findOne({ username }).then(user => {
     if (!user) {
       return res.status(404).json({ usernamenotfound: "error" });
     }
-
-    return res.json(
-            {
+    res.json({
               hospitalName: user.hospitalName,
               address: user.address,
               city: user.city, 
