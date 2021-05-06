@@ -46,12 +46,12 @@ module.exports = function validateAppointmentInput(data) {
 
   // Brand checks
   if (Validator.isEmpty(data.brand)) {
-    errors.brand = "Password field is required";
+    errors.brand = "Brand field is required";
   }
 
   // Stage checks
   if (Validator.isEmpty(data.stage)) {
-    errors.stage = "Confirm password field is required";
+    errors.stage = "Stage field is required";
   }
 
   return {
