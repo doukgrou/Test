@@ -31,4 +31,4 @@ VAcCure\models\Vaccination.js
 
 VAcCure/client/src/components/dashboard/Dashboard.js 
 
-VAcCure/VAcCure/client/src/index.css
+VAcCure/client/src/index.css
