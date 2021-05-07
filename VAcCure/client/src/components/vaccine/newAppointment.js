@@ -9,14 +9,14 @@ class Register extends Component {
   constructor() {
     super();
     this.state = {
-      hospitalName: "",
+      firstName: "",
+      lastName : "",
+      amka : "",
+      dateOfBirth : "",
       address : "",
-      city : "",
-      country : "",
-      phone : "",
-      email: "",
-      username: "",
-      password: "",
+      dateDose1: "",
+      dateDose2: "",
+      vaccineBrand: "",
       password2: "",
       errors: {}
     };
@@ -45,15 +45,15 @@ class Register extends Component {
     e.preventDefault();
 
     const newUser = {
-      hospitalName: this.state.hospitalName,
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      amka: this.state.amka, 
+      dateOfBirth: this.state.dateOfBirth, 
       address: this.state.address,
-      city: this.state.city, 
-      country: this.state.country, 
-      phone: this.state.phone,
-      email: this.state.email,
-      username: this.state.username,
-      password: this.state.password,
-      password2: this.state.password2
+      dateDose1: this.state.dateDose1,
+      dateDose2: this.state.dateDose2,
+      vaccineBrand: this.state.vaccineBrand,
+      
     };
 
     this.props.registerUser(newUser, this.props.history);
@@ -72,26 +72,71 @@ class Register extends Component {
             </Link>
             <div className="col s12" style={{ paddingLeft: "11.250px" }}>
               <h4>
-                <b>Register</b> below
+                <b>Insert New Appointment</b> below
               </h4>
-              <p className="grey-text text-darken-1">
-                Already have an account? <Link to="/login">Log in</Link>
+              <br></br>
+              <br></br>
+              <p className="black-text text-darken-1"style={{ paddingLeft: "8.5rem" }}>
+                <b>Citizen's card: </b>
               </p>
             </div>
             <form noValidate onSubmit={this.onSubmit}>
+            <div className="col s8 offset-s2" style={{ backgroundColor: "#D9F2F8", width: "500px"}}>
               <div className="input-field col s12">
                 <input
                   onChange={this.onChange}
-                  value={this.state.hospitalName}
-                  error={errors.hospitalName}
-                  id="hospitalName"
+                  value={this.state.firstName}
+                  error={errors.firstName}
+                  id="firstName"
                   type="text"
                   className={classnames("", {
-                    invalid: errors.hospitalName
+                    invalid: errors.firstName
                   })}
                 />
-                <label htmlFor="hospitalName">Hospital's Name</label>
-                <span className="red-text">{errors.hospitalName}</span>
+                <label htmlFor="firstName"><b className="black-text text-darken-1">First Name</b></label>
+                <span className="red-text">{errors.firstName}</span>
+              </div>
+              <div className="input-field col s12">
+                <input
+                  onChange={this.onChange}
+                  value={this.state.lastName}
+                  error={errors.lastName}
+                  id="lastName"
+                  type="text"
+                  className={classnames("", {
+                    invalid: errors.lastName
+                  })}
+                />
+                <label htmlFor="lastName"><b className="black-text text-darken-1">Last Name</b></label>
+                <span className="red-text">{errors.lastName}</span>
+              </div>
+              <div className="input-field col s12">
+                <input
+                  onChange={this.onChange}
+                  value={this.state.amka}
+                  error={errors.amka}
+                  id="amka"
+                  type="text"
+                  className={classnames("", {
+                    invalid: errors.amka
+                  })}
+                />
+                <label htmlFor="amka"><b className="black-text text-darken-1">AMKA:</b></label>
+                <span className="red-text">{errors.amka}</span>
+              </div>
+              <div className="input-field col s12">
+                <input
+                  onChange={this.onChange}
+                  value={this.state.dateOfBirth}
+                  error={errors.dateOfBirth}
+                  id="dateOfBirth"
+                  type="date"
+                  className={classnames("", {
+                    invalid: errors.dateOfBirth
+                  })}
+                />
+                <label htmlFor="dateOfBirth"><b className="black-text text-darken-1">Date of Birth</b></label>
+                <span className="red-text">{errors.dateOfBirth}</span>
               </div>
               <div className="input-field col s12">
                 <input
@@ -104,120 +149,68 @@ class Register extends Component {
                     invalid: errors.address
                   })}
                 />
-                <label htmlFor="address">Address</label>
+                <label htmlFor="address"><b className="black-text text-darken-1">Full Address</b></label>
                 <span className="red-text">{errors.address}</span>
               </div>
               <div className="input-field col s12">
                 <input
                   onChange={this.onChange}
-                  value={this.state.city}
-                  error={errors.city}
-                  id="city"
+                  value={this.state.dateDose1}
+                  error={errors.dateDose1}
+                  id="dateDose1"
+                  type="date"
+                  className={classnames("", {
+                    invalid: errors.dateDose1
+                  })}
+                />
+                <label htmlFor="dateDose1"><b className="black-text text-darken-1">Date of Dose-1</b></label>
+                <span className="red-text">{errors.dateDose1}</span>
+              </div>
+              <div className="input-field col s12">
+                <input
+                  onChange={this.onChange}
+                  value={this.state.dateDose2}
+                  error={errors.dateDose2}
+                  id="dateDose2"
+                  type="date"
+                  className={classnames("", {
+                    invalid: errors.dateDose2
+                  })}
+                />
+                <label htmlFor="dateDose2"><b className="black-text text-darken-1"><b className="black-text text-darken-1">Date of Dose-2</b></b></label>
+                <span className="red-text">{errors.dateDose2}</span>
+              </div>
+              <div className="input-field col s12">
+                <input
+                  onChange={this.onChange}
+                  value={this.state.vaccineBrand}
+                  error={errors.vaccineBrand}
+                  id="vaccineBrand"
                   type="text"
                   className={classnames("", {
-                    invalid: errors.city
+                    invalid: errors.vaccineBrand
                   })}
                 />
-                <label htmlFor="city">City</label>
-                <span className="red-text">{errors.city}</span>
+                <label htmlFor="vaccineBrand"><b><b className="black-text text-darken-1">Vaccine's Brand</b></b></label>
+                <span className="red-text">{errors.vaccineBrand}</span>
               </div>
-              <div className="input-field col s12">
-                <input
-                  onChange={this.onChange}
-                  value={this.state.country}
-                  error={errors.country}
-                  id="country"
-                  type="text"
-                  className={classnames("", {
-                    invalid: errors.country
-                  })}
-                />
-                <label htmlFor="country">Country</label>
-                <span className="red-text">{errors.country}</span>
-              </div>
-              <div className="input-field col s12">
-                <input
-                  onChange={this.onChange}
-                  value={this.state.phone}
-                  error={errors.phone}
-                  id="phone"
-                  type="text"
-                  className={classnames("", {
-                    invalid: errors.phone
-                  })}
-                />
-                <label htmlFor="phone">Phone</label>
-                <span className="red-text">{errors.phone}</span>
-              </div>
-              <div className="input-field col s12">
-                <input
-                  onChange={this.onChange}
-                  value={this.state.email}
-                  error={errors.email}
-                  id="email"
-                  type="email"
-                  className={classnames("", {
-                    invalid: errors.email
-                  })}
-                />
-                <label htmlFor="email">Email</label>
-                <span className="red-text">{errors.email}</span>
-              </div>
-              <div className="input-field col s12">
-                <input
-                  onChange={this.onChange}
-                  value={this.state.username}
-                  error={errors.username}
-                  id="username"
-                  type="text"
-                  className={classnames("", {
-                    invalid: errors.username
-                  })}
-                />
-                <label htmlFor="username">Username</label>
-                <span className="red-text">{errors.username}</span>
-              </div>
-              <div className="input-field col s12">
-                <input
-                  onChange={this.onChange}
-                  value={this.state.password}
-                  error={errors.password}
-                  id="password"
-                  type="password"
-                  className={classnames("", {
-                    invalid: errors.password
-                  })}
-                />
-                <label htmlFor="password">Password</label>
-                <span className="red-text">{errors.password}</span>
-              </div>
-              <div className="input-field col s12">
-                <input
-                  onChange={this.onChange}
-                  value={this.state.password2}
-                  error={errors.password2}
-                  id="password2"
-                  type="password"
-                  className={classnames("", {
-                    invalid: errors.password2
-                  })}
-                />
-                <label htmlFor="password2">Confirm Password</label>
-                <span className="red-text">{errors.password2}</span>
-              </div>
-              <div className="col s12" style={{ paddingLeft: "11.250px" }}>
+              
+              <div className="col s12" style={{ paddingLeft: "330px" }}>
                 <button
                   style={{
                     width: "150px",
                     borderRadius: "3px",
                     letterSpacing: "1.5px",
-                    marginTop: "1rem"
+                    marginTop: "2rem"
                   }}
                   type="submit"
-                  className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+                  className="btn btn-large waves-effect waves-light hoverable marine accent-3"
                 >
-                  Sign up
+                  SUBMIT
                 </button>
+                <br></br>
+                <br></br>
+              </div>
               </div>
             </form>
           </div>
