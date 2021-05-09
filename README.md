@@ -32,3 +32,5 @@ VAcCure\models\Vaccination.js
 VAcCure/client/src/components/dashboard/Dashboard.js 
 
 VAcCure/client/src/index.css
+
+VAcCure/client/package.json
