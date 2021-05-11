@@ -8,7 +8,7 @@ const appoinment = require("../../validation/appointment");
 
 
 function setdate1(date){ 
-    return new Date(date.getUTCFullYear(),date.getUTCMonth(),00,00,00,00);;
+    return new Date(date.getUTCFullYear(),date.getUTCMonth(),00,00,00,00);
 }
 
 
@@ -36,6 +36,7 @@ router.post("/appointments", (req, res) => {
                 gender: req.body.gender,
                 amka: req.body.amka,
                 phone: req.body.phone,
+                address: req.body.address,
                 dateOfBirth: req.body.dateOfBirth,
                 dateDose1: req.body.dateDose1,
                 doseOneCompleted: false,
@@ -66,7 +67,7 @@ router.put("/appointments", (req, res) => {
         if (!message) {
            return res.json({message: 'updated.'});
         }else{
-            return res.json({message: err});
+            return res.json({error: message});
         }
     });
 
