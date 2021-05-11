@@ -68,7 +68,7 @@ router.put("/appointments", (req, res) => {
         }else{
             return res.json({message: err});
         }
-    })
+    });
 
 });
 
