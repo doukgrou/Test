@@ -3,11 +3,11 @@ const Schema = mongoose.Schema;
 
 // Create Schema
 const VaccinationSchema = new Schema({
-  name: {
+  firstName: {
     type: String,
     required: true
   },
-  surname: {
+  lastName: {
     type: String,
     required: true
   },
@@ -15,7 +15,7 @@ const VaccinationSchema = new Schema({
     type: String,
     required: true
   },
-  AMKA: {
+  amka: {
     type: String,
     required: true
   },
@@ -23,42 +23,52 @@ const VaccinationSchema = new Schema({
     type: String,
     required: true
   },
-  birthday: {
+  address: {
+    type: String,
+    required: true
+  },
+  dateOfBirth: {
     type: Date,
     required: true
   },
-  doseOne: {
-    type: Date
+  dateDose1: {
+    type: Date,
+    required: true
   },
   doseOneCompleted:{
     type: Boolean
     //default: doseOTwoPending = false
   },
-  doseTwo: {
-    type: Date
+  dateDose2: {
+    type: Date,
+    required: true
   },
   doseOTwoCompleted:{
     type: Boolean
   },
-  brand: {
+  vaccineBrand: {
     type: String,
     required: true
   },
   symptoms: {
     type: String,
-    required: true
+    required: false
   },
   comments: {
     type: String,
-    required: true
+    required: false
   },
   stage: {
     type: String,
-    required: true
+    default: "Pending"
   },
   date: {
     type: Date,
     default: Date.now
+  },
+  regDate: {
+    type: Date,
+    required: false
   }
 });
 
