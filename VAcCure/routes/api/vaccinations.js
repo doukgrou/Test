@@ -62,15 +62,13 @@ router.post("/appointments", (req, res) => {
 
 router.put("/appointments", (req, res) => {
 
-    Vaccination.updateOne({ _id: req.body._id }, req.body, err => {
-
-        if (!err) {
+    Vaccination.updateOne({ _id: req.body._id }, req.body, message => {
+        if (!message) {
            return res.json({message: 'updated.'});
         }else{
             return res.json({message: err});
         }
-        
-    });
+    })
 
 });
 
