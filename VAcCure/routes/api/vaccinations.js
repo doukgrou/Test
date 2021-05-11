@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const isEmpty = require("is-empty");
 
 
 const Vaccination = require("../../models/Vaccination");
@@ -59,6 +60,21 @@ router.post("/appointments", (req, res) => {
 
 });
 
+router.put("/appointments", (req, res) => {
+
+    Vaccination.updateOne({ _id: req.body._id }, req.body, err => {
+
+        if (!err) {
+           return res.json({message: 'updated.'});
+        }else{
+            return res.json({message: err});
+        }
+        
+    });
+
+});
+
+
 
 router.get("/appointments-amka", (req, res) => {
     const amka = req.body.amka
@@ -67,7 +83,7 @@ router.get("/appointments-amka", (req, res) => {
             return res.status(404).json({ vaccinationnotfound: "error" });
         }
         res.json({
-                    firstName: vaccination.firstName
+                    firstName: vaccination
                 })
     });
 });
@@ -90,34 +106,19 @@ router.get("/appointments-byname", (req, res) => {
 });
 
 
-router.get("/appointments-byDate", (req, res) => {
+router.get("/appointments-bydate", (req, res) => {
 
-    const dateDose1 = req.body.dateDose1;
-    const dateDose2 = req.body.dateDose2;
-
-    try {
-        Vaccination.find({dateDose1}).then(vaccinationRecords => {
-            
-            
-           
-            
-            res.json({ 
-                        records : vaccinationRecords,
-                    });
-
-        });
-    }catch(e){
-
-    }
+    const dateDose1 = req.body.rearchDate;
+    const dateDose2 = req.body.rearchDate;
 
 
-    Vaccination.find({dateDose2}).then(vaccinationRecords2 => {
-            
-        if (!vaccinationRecords2) {
-            return res.status(404).json({ vaccinationRecords2: "error" });
+    Vaccination.find({$or:[{dateDose1 : dateDose1},{dateDose2 : dateDose2}]}).then(vaccinationRecords => {
+
+        if (!vaccinationRecords) {
+            return res.status(404).json({ vaccinationnotfound: "error" });
         }
         
-        res.json({ records : vaccinationRecords2 });
+        res.json({ records : vaccinationRecords });
 
     });
 });
