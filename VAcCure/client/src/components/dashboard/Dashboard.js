@@ -145,6 +145,19 @@ class Dashboard extends Component {
               Logout
             </button>
 
+            <button
+              style={{
+                width: "280px",
+                borderRadius: "3px",
+                letterSpacing: "1.5px",
+                marginTop: "1rem"
+              }}
+              onClick={this.onLogoutClick}
+              className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+            >
+              New Appointment
+            </button>
+
           </div>
         </div>
     );
