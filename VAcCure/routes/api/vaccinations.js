@@ -1,14 +1,14 @@
 const express = require("express");
 const router = express.Router();
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
 
 
-const keys = require("../../config/keys");
 const Vaccination = require("../../models/Vaccination");
-
-
 const appoinment = require("../../validation/appointment");
+
+
+function setdate1(date){ 
+    return new Date(date.getUTCFullYear(),date.getUTCMonth(),00,00,00,00);;
+}
 
 
 router.post("/appointments", (req, res) => {
@@ -22,27 +22,29 @@ router.post("/appointments", (req, res) => {
     }
 
 
-    Vaccination.findOne({AMKA: req.body.AMKA }).then(vaccination => {
+    Vaccination.findOne({amka: req.body.amka }).then(vaccination => {
         
         if(vaccination){
-            return res.status(400).json({AMKA: "AMKA already exist"});
-        } 
+            return res.status(400).json({amka: "AMKA already exist"});
+        }
         else{
-            
+
             const newVaccination = new Vaccination({
-                name: req.body.name,
-                surname: req.body.surname,
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
                 gender: req.body.gender,
-                AMKA: req.body.AMKA,
+                amka: req.body.amka,
                 phone: req.body.phone,
-                birthday: req.body.birthday,
-                doseOne: req.body.doseOne,
+                dateOfBirth: req.body.dateOfBirth,
+                dateDose1: req.body.dateDose1,
                 doseOneCompleted: false,
-                doseTwo: req.body.doseTwo,
+                dateDose2: req.body.dateDose2,
                 doseTwoCompleted: false,
-                brand: req.body.brand,
+                vaccineBrand: req.body.vaccineBrand,
                 stage: req.body.stage
             })
+
+            newVaccination.regDate = setdate1(newVaccination.date);
 
             try{
                 newVaccination.save().then(vaccination => res.json(vaccination));
@@ -55,6 +57,69 @@ router.post("/appointments", (req, res) => {
     });
 
 
+});
+
+
+router.get("/appointments-amka", (req, res) => {
+    const amka = req.body.amka
+    Vaccination.findOne({ amka }).then(vaccination => {
+        if (!vaccination) {
+            return res.status(404).json({ vaccinationnotfound: "error" });
+        }
+        res.json({
+                    firstName: vaccination.firstName
+                })
+    });
+});
+
+
+router.get("/appointments-byname", (req, res) => {
+
+    const firstName = req.body.firstName
+    const lastName = req.body.lastName
+
+    Vaccination.find({firstName, lastName} ).then(vaccinationRecords => {
+        
+        if (!vaccinationRecords) {
+            return res.status(404).json({ vaccinationnotfound: "error" });
+        }
+        
+        res.json({ records : vaccinationRecords });
+
+    });
+});
+
+
+router.get("/appointments-byDate", (req, res) => {
+
+    const dateDose1 = req.body.dateDose1;
+    const dateDose2 = req.body.dateDose2;
+
+    try {
+        Vaccination.find({dateDose1}).then(vaccinationRecords => {
+            
+            
+           
+            
+            res.json({ 
+                        records : vaccinationRecords,
+                    });
+
+        });
+    }catch(e){
+
+    }
+
+
+    Vaccination.find({dateDose2}).then(vaccinationRecords2 => {
+            
+        if (!vaccinationRecords2) {
+            return res.status(404).json({ vaccinationRecords2: "error" });
+        }
+        
+        res.json({ records : vaccinationRecords2 });
+
+    });
 });
 
 
