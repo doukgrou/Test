@@ -34,3 +34,7 @@ VAcCure/client/src/components/dashboard/Dashboard.js
 VAcCure/client/src/index.css
 
 VAcCure/client/package.json
+
+11/5/2021
+VAcCure/client/src/index.css
+VAcCure/client/src/components/dashboard/Dashboard.js
