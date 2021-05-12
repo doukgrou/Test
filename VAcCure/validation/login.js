@@ -1,6 +1,6 @@
 const Validator = require("validator");
-
-const isEmpty = require("is-empty");module.exports = function validateLoginInput(data) {
+const isEmpty = require("is-empty");
+module.exports = function validateLoginInput(data) {
 
   let errors = {};
 
@@ -18,9 +18,6 @@ const isEmpty = require("is-empty");module.exports = function validateLoginInput
     errors.password = "Password field is required";
   }
   
-  return {
-    errors,
-    isValid: isEmpty(errors)
-  };
+  return {errors,isValid: isEmpty(errors)};
 
 };
