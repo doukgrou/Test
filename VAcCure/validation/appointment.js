@@ -2,60 +2,67 @@ const Validator = require("validator");
 const isEmpty = require("is-empty");
 
 module.exports = function validateAppointmentInput(data) {
-  let errors = {};
+    let errors = {};
 
-  // Convert empty fields toan  empty string so we can use validator functions
-  data.name = !isEmpty(data.name) ? data.name : "";
-  data.surname = !isEmpty(data.surname) ? data.surname : "";
-  data.gender = !isEmpty(data.gender) ? data.gender : "";
-  data.AMKA = !isEmpty(data.AMKA) ? data.AMKA : "";
-  data.phone = !isEmpty(data.phone) ? data.phone : "";
-// data.birthday = !isEmpty(data.birthday) ? data.birthday : "";
-  data.brand = !isEmpty(data.brand) ? data.brand : "";
-  data.stage = !isEmpty(data.stage) ? data.stage : "";
+    // Convert empty fields toan  empty string so we can use validator functions
+    data.firstName = !isEmpty(data.firstName) ? data.firstName : "";
+    data.lastName = !isEmpty(data.lastName) ? data.lastName : "";
+    data.gender = !isEmpty(data.gender) ? data.gender : "";
+    data.amka = !isEmpty(data.amka) ? data.amka : "";
+    data.dateOfBirth = !isEmpty(data.dateOfBirth) ? data.dateOfBirth : "";
+    data.phone = !isEmpty(data.phone) ? data.phone : "";
+    data.address = !isEmpty(data.address) ? data.address : "";
+    data.dateDose1 = !isEmpty(data.dateDose1) ? data.dateDose1 : "";
+    data.dateDose2 = !isEmpty(data.dateDose2) ? data.dateDose2 : "";
+    //data.dose1Completed = !isEmpty(data.dose1Completed) ? data.dose1Completed : "";
+    //data.dose2Completed = !isEmpty(data.dose2Completed) ? data.dose2Completed : "";
+    data.vaccineBrand = !isEmpty(data.vaccineBrand) ? data.vaccineBrand : "";
+    data.symptoms = !isEmpty(data.symptoms) ? data.symptoms : "";
+    data.comments = !isEmpty(data.comments) ? data.comments : "";
+    //data.stage = !isEmpty(data.stage) ? data.stage : "";
 
-  // Name checks
-  if (Validator.isEmpty(data.name)) {
-    errors.name = "Name field is required";
-  }
+    // Name checks
+    if (Validator.isEmpty(data.firstName)) {
+        errors.firstName = "First name field is required";
+    }
 
-  // Surname checks
-  if (Validator.isEmpty(data.surname)) {
-    errors.surname = "Surname field is required";
-  }
+    // Surname checks
+    if (Validator.isEmpty(data.lastName)) {
+        errors.lastName = "Last name field is required";
+    }
 
-  // Gender checks
-  if (Validator.isEmpty(data.gender)) {
-    errors.gender = "Gender field is required";
-  }
+    // Gender checks
+    if (Validator.isEmpty(data.gender)) {
+        errors.gender = "Gender field is required";
+    }
 
-  // AMKA checks
-  if (Validator.isEmpty(data.AMKA)) {
-    errors.AMKA = "AMKA field is required";
-  }
+    // AMKA checks
+    if (Validator.isEmpty(data.amka)) {
+        errors.amka = "AMKA field is required";
+    }
 
-  // Phone checks
-  if (Validator.isEmpty(data.phone)) {
-    errors.phone = "Phone field is required";
-  }
+    // Birthday checks
+    if (Validator.isEmpty(data.dateOfBirth)) {
+        errors.dateOfBirth = "Birthday field is required";
+    }
+    
+    // Phone checks
+    if (Validator.isEmpty(data.phone)) {
+        errors.phone = "Phone field is required";
+    }
 
-//   // Birthday checks
-//   if (Validator.isEmpty(data.birthday)) {
-//     errors.birthday = "Birthday field is required";
-//   }
+    //Address checks
+    if (Validator.isEmpty(data.address)) {
+        errors.address = "Address field is required";
+    }
 
-  // Brand checks
-  if (Validator.isEmpty(data.brand)) {
-    errors.brand = "Brand field is required";
-  }
+    // // Stage checks
+    // if (Validator.isEmpty(data.stage)) {
+    //     errors.stage = "Stage of vaccination field is required";
+    // }
 
-  // Stage checks
-  if (Validator.isEmpty(data.stage)) {
-    errors.stage = "Stage field is required";
-  }
-
-  return {
-    errors,
-    isValid: isEmpty(errors)
-  };
-};
+    return {
+        errors,
+        isValid: isEmpty(errors)
+    };
+}
