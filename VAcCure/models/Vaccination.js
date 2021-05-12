@@ -35,20 +35,21 @@ const VaccinationSchema = new Schema({
     type: Date,
     required: true
   },
-  doseOneCompleted:{
-    type: Boolean
-    //default: doseOTwoPending = false
-  },
   dateDose2: {
     type: Date,
     required: true
   },
   doseOTwoCompleted:{
-    type: Boolean
+    type: Boolean,
+    default: false
+  },
+  doseOneCompleted:{
+    type: Boolean,
+    default: false
   },
   vaccineBrand: {
     type: String,
-    required: true
+    required: false
   },
   symptoms: {
     type: String,
