@@ -46,7 +46,7 @@ class NewAppointment extends Component {
   onSubmit = e => {
     e.preventDefault();
 
-    const newUser = {
+    const newVaccination = {
       firstName: this.state.firstName,
       lastName: this.state.lastName,
       amka: this.state.amka, 
@@ -58,7 +58,7 @@ class NewAppointment extends Component {
       
     };
 
-    this.props.registerUser(newUser, this.props.history);
+    this.props.newAppointment(newVaccination, this.props.history);
   };
 
   render() {
