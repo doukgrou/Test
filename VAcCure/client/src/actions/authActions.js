@@ -46,10 +46,10 @@ export const loginUser = userData => dispatch => {
 export const newAppointment = (vaccinationData, history) => dispatch => {
   axios
     .post("/api/vaccinations/appointments", vaccinationData)
-    .then(res => history.push("/newAppointment"))
-    .catch(err =>
+    .then(res => history.push("/dashboard")).catch(err =>
       dispatch({
-        errors: err
+        type: GET_ERRORS,
+        payload: err.response.data
       })
     );
 };
