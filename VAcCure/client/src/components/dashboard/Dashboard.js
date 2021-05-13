@@ -198,25 +198,21 @@ class Dashboard extends Component {
             </div>
         </div>        
     </div>  
-    <div className="col s6"> 
-    <Link
-    to="/newAppointment"
-              style={{
-                width: "250px",
-                borderRadius: "3px",
-                letterSpacing: "1.5px",
-                bottom: "0",
-                left:"10 rem",
-                margin: "auto",
-                display:"inline"
-              }}
-              onClick={this.onLogoutClick}
-              className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-            >
-             NewAppointment
-            </Link>
-
-            </div>
+    <div className="col s6">
+              <Link
+                to="/newAppointment"
+                style={{
+                  width: "250px",
+                  borderRadius: "3px",
+                  letterSpacing: "1.5px",
+                  marginLeft: "10rem",
+                  marginTop: "1rem"
+                }}
+                className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+              >
+                New Appointment
+              </Link>
+      </div>
 <div class="center">
             <button
               style={{
