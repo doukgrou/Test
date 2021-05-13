@@ -17,12 +17,6 @@ export const registerUser = (userData, history) => dispatch => {
     );
 };
 
-export const newAppointment = (userData, history) => dispatch => {
-  axios
-    .post("/api/users/vaccine/newAppointment", userData)
-    .then(res => history.push("/newAppointment"))
-};
-
 // Login - get user token
 export const loginUser = userData => dispatch => {
   axios
@@ -44,6 +38,18 @@ export const loginUser = userData => dispatch => {
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
+      })
+    );
+};
+
+// newApoointmet
+export const newAppointment = (vaccinationData, history) => dispatch => {
+  axios
+    .post("/api/vaccinations/appointments", vaccinationData)
+    .then(res => history.push("/newAppointment"))
+    .catch(err =>
+      dispatch({
+        errors: err
       })
     );
 };
