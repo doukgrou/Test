@@ -1,3 +1,4 @@
+const { response } = require("express");
 const express = require("express");
 const router = express.Router();
 const isEmpty = require("is-empty");
@@ -75,52 +76,54 @@ router.put("/appointments", (req, res) => {
 
 
 
-router.get("/appointments-amka", (req, res) => {
-    const amka = req.body.amka
-    Vaccination.findOne({ amka }).then(vaccination => {
-        if (!vaccination) {
-            return res.status(404).json({ vaccinationnotfound: "error" });
-        }
-        res.json({
-                    firstName: vaccination
-                })
-    });
+router.get("/appointments", (req, res) => {
+
+    if(req.body.amka)
+    {
+        const amka = req.body.amka
+        Vaccination.findOne({ amka }).then(vaccination => {
+            if (!vaccination) {
+                return res.status(404).json({ vaccinationnotfound: "error" });
+            }
+            res.json({ firstName: vaccination })
+        });
+    }
+    else if(req.body.firstName && req.body.lastName)
+    {
+        const firstName = req.body.firstName
+        const lastName = req.body.lastName
+
+        Vaccination.find({firstName, lastName} ).then(vaccinationRecords => {
+            
+            if (!vaccinationRecords) {
+                return res.status(404).json({ vaccinationnotfound: "error" });
+            }
+            
+            res.json({ records : vaccinationRecords });
+
+        });
+    }
+    else if(req.body.searchDate)
+    {
+        const dateDose1 = req.body.searchDate;
+        const dateDose2 = req.body.searchDate;
+
+        Vaccination.find({$or:[{dateDose1 : dateDose1},{dateDose2 : dateDose2}]}).then(vaccinationRecords => {
+
+            if (!vaccinationRecords) {
+                return res.status(404).json({ vaccinationnotfound: "error" });
+            }
+            
+            res.json({ records : vaccinationRecords });
+
+        });
+
+    }
+    else
+    {
+        return res.json({error : "empty request"});
+    }
+
 });
-
-
-router.get("/appointments-byname", (req, res) => {
-
-    const firstName = req.body.firstName
-    const lastName = req.body.lastName
-
-    Vaccination.find({firstName, lastName} ).then(vaccinationRecords => {
-        
-        if (!vaccinationRecords) {
-            return res.status(404).json({ vaccinationnotfound: "error" });
-        }
-        
-        res.json({ records : vaccinationRecords });
-
-    });
-});
-
-
-router.get("/appointments-bydate", (req, res) => {
-
-    const dateDose1 = req.body.rearchDate;
-    const dateDose2 = req.body.rearchDate;
-
-
-    Vaccination.find({$or:[{dateDose1 : dateDose1},{dateDose2 : dateDose2}]}).then(vaccinationRecords => {
-
-        if (!vaccinationRecords) {
-            return res.status(404).json({ vaccinationnotfound: "error" });
-        }
-        
-        res.json({ records : vaccinationRecords });
-
-    });
-});
-
 
 module.exports = router;
