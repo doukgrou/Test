@@ -13,15 +13,15 @@ const VaccinationSchema = new Schema({
   },
   gender: {
     type: String,
-    required: true
+    required: false
   },
   amka: {
-    type: String,
+    type: Number,
     required: true
   },
   phone: {
-    type: String,
-    required: true
+    type: Number,
+    required: false
   },
   address: {
     type: String,
@@ -35,15 +35,15 @@ const VaccinationSchema = new Schema({
     type: Date,
     required: true
   },
+  doseOneCompleted:{
+    type: Boolean,
+    default: false
+  },
   dateDose2: {
     type: Date,
     required: true
   },
   doseOTwoCompleted:{
-    type: Boolean,
-    default: false
-  },
-  doseOneCompleted:{
     type: Boolean,
     default: false
   },
@@ -66,10 +66,6 @@ const VaccinationSchema = new Schema({
   date: {
     type: Date,
     default: Date.now
-  },
-  regDate: {
-    type: Date,
-    required: false
   }
 });
 
