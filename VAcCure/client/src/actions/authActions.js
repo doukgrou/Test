@@ -42,18 +42,6 @@ export const loginUser = userData => dispatch => {
     );
 };
 
-// newApoointmet
-export const newAppointment = (vaccinationData, history) => dispatch => {
-  axios
-    .post("/api/vaccinations/appointments", vaccinationData)
-    .then(res => history.push("/dashboard")).catch(err =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data
-      })
-    );
-};
-
 // Set logged in user
 export const setCurrentUser = decoded => {
   return {
