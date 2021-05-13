@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
-import { Link } from "react-router-dom";
-
+import { Link } from 'react-router-dom';
 
 class Dashboard extends Component {
   onLogoutClick = e => {
@@ -15,21 +14,22 @@ class Dashboard extends Component {
     const { user } = this.props.auth;
 
     return (
-      <div  className="container valign-wrapper" style={{width:"1000px"}}>
+      <div  className="container valign-wrapper" style={{width:"100%", display: "flex"}}>
         <div className="row">
         <div class="left">
-          <div className="col s12" style={{background:"#54B8C5", height:"130px"}}>
-      
+        <div className="col s12" style={{background:"#54B8C5",right:"0",left:"0",width: "1440px", height:"130px"}}>
+        <div class="center">
           <br />
-          <b style={{size: "30px",weight:"300px"}}>Hospital Name:</b>            {user.hospitalName.split()}<br /> 
-          <b style={{size: "30px"}}>The hospital is placed at: </b>{user.address.split()}   
+          <b style={{size: "30rem", width:"200rem"}}>Hospital Name:</b>            {user.hospitalName.split()}<br /> 
+          <b style={{size: "30rem", width:"200rem"}}>The hospital is placed at: </b>{user.address.split()}   
                                             , {user.city.split()}    
                                             , {user.country.split()}<br />
-          <b style={{size: "30px"}}>Phone:</b>                    {user.phone.split()}<br /> 
-          <b style={{size: "30px"}}>email:</b>                    {user.email.split()}<br /> 
+          <b style={{size: "30rem", width:"200rem"}}>Phone:</b>                    {user.phone.split()}<br /> 
+          <b style={{size: "30rem", width:"200rem"}}>email:</b>                    {user.email.split()}<br /> 
 
           
             <br />
+        </div>
         </div>
         <div>
         </div>
@@ -45,7 +45,7 @@ class Dashboard extends Component {
           <br /> 
           <br /> 
           
-          <div class="left">
+          <div class="left" style={{width:"200rem"}}>
               <h6><b>Number of Vaccines for the day:</b> 1300</h6> 
               <br />
               <h6><b>Number of Vaccines for the week:</b> 150</h6>
@@ -68,7 +68,7 @@ class Dashboard extends Component {
                               <div class="left">
          
           
-                                <i class="material-icons">&#xE8B6;</i>
+                                
 
                                 <input type="text" class="form-control" placeholder="Search&hellip;"/></div>
                         </div>
@@ -80,13 +80,13 @@ class Dashboard extends Component {
                   
                     <thead>
                         <tr>
-        <th width="200"> No:</th>
-        <th width="500">Name</th>
-        <th width="500">AMKA</th>
-        <th width="500">Age</th>
+        <th width="200rem"> No:</th>
+        <th width="500rem">Name</th>
+        <th width="500rem">AMKA</th>
+        <th width="500rem">Age</th>
         
-        <th width="500">Stage </th>
-        <th width="200">Action</th>
+        <th width="500rem">Stage </th>
+        <th width="200rem">Action</th>
       </tr>
     </thead>
     <tbody>
@@ -198,44 +198,50 @@ class Dashboard extends Component {
             </div>
         </div>        
     </div>  
+    <div className="col s6"> 
+    <Link
+    to="/newAppointment"
+              style={{
+                width: "250px",
+                borderRadius: "3px",
+                letterSpacing: "1.5px",
+                bottom: "0",
+                left:"10 rem",
+                margin: "auto",
+                display:"inline"
+              }}
+              onClick={this.onLogoutClick}
+              className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+            >
+             NewAppointment
+            </Link>
+
+            </div>
+<div class="center">
             <button
               style={{
                 width: "200px",
                 borderRadius: "3px",
                 letterSpacing: "1.5px",
-                marginTop: "1rem",
-                marginRight: "9rem",
+                bottom: "0",
+                left:"27rem",
+                margin: "auto",
+                display:"inline"
               }}
               onClick={this.onLogoutClick}
               className="btn btn-large waves-effect waves-light hoverable blue accent-3"
             >
               Logout
             </button>
-
-            <div className="col s6">
-              <Link
-                to="/newAppointment"
-                style={{
-                  width: "250px",
-                  borderRadius: "3px",
-                  letterSpacing: "1.5px",
-                  marginLeft: "10rem",
-                  marginTop: "1rem"
-                }}
-                className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-              >
-                New Appointment
-              </Link>
             </div>
-           
-          
+            
 
             <footer
           style={{position: "fixed",
             bottom: "0",
             left: "0",
             width: "100%",
-            height: "300px",
+            height: "100px",
             padding: "0 5px",
             display: "flex",
             items: "center",
@@ -248,36 +254,26 @@ class Dashboard extends Component {
             <div class="row">
                 <div class="col-sm-9">
                     <div class="row">
-                        <div class="col-sm-12 footer__contact-us">
-                           <br/>
-                           <br/>
-                            Contact us:
+                        <div class="col-sm-16 footer__contact-us">
+                            Contact us: 2310323988
                         </div>
-                        <div class="col-sm-12">
-                            Sentimoto Ltd
+                        <div class="col-sm-16">
+                            Email: info@vaccure.com
                         </div>
-                        <div class="col-sm-12">
-                            30 Upper High Street,Thame, Oxfordshire, OX9 3EZ
-                        </div>
-                        <div class="col-sm-12">
-                            Email: info@sentimoto.com
-                        </div>
-                        <div class="col-sm-12">
-                             Company No. 08804271, VAT No. 205691416
-                        </div>
+                        <div class="col-sm-12 footer__links">
+             <a href="terms">Terms of Use</a> | <a href="privacy">Privacy Policy</a>
+        </div>
+        <div class="col-sm-12 footer__copyright">(c) VAcCure. All rights reserved</div>
                     </div>
                 </div>
                
             </div>
         </div>
     </div>
-    <div class="row footer__bottom-wrapper">
-        <div class="col-sm-12 footer__links">
-            <a href="press-kit">Press Kit</a> | <a href="terms">Terms of Use</a> | <a href="privacy">Privacy Policy</a>
-        </div>
-        <div class="col-sm-12 footer__copyright">(c) Sentimoto Ltd. All rights reserved</div>
-    </div>
+   
+   
 </div>
+
 </div>
     </footer>
           </div>
