@@ -17,6 +17,12 @@ export const registerUser = (userData, history) => dispatch => {
     );
 };
 
+export const newAppointment = (userData, history) => dispatch => {
+  axios
+    .post("/api/users/vaccine/newAppointment", userData)
+    .then(res => history.push("/newAppointment"))
+};
+
 // Login - get user token
 export const loginUser = userData => dispatch => {
   axios
