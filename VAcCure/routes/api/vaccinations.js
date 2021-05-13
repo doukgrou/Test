@@ -1,16 +1,10 @@
 const { response } = require("express");
 const express = require("express");
 const router = express.Router();
-const isEmpty = require("is-empty");
 
 
 const Vaccination = require("../../models/Vaccination");
 const appoinment = require("../../validation/appointment");
-
-
-function setdate1(date){ 
-    return new Date(date.getUTCFullYear(),date.getUTCMonth(),00,00,00,00);
-}
 
 
 router.post("/appointments", (req, res) => {
@@ -40,14 +34,14 @@ router.post("/appointments", (req, res) => {
                 address: req.body.address,
                 dateOfBirth: req.body.dateOfBirth,
                 dateDose1: req.body.dateDose1,
-                doseOneCompleted: false,
                 dateDose2: req.body.dateDose2,
-                doseTwoCompleted: false,
+                doseOneCompleted: req.body.doseOneCompleted,
+                doseTwoCompleted: req.body.doseTwoCompleted,
                 vaccineBrand: req.body.vaccineBrand,
-                stage: req.body.stage
+                stage: req.body.stage,
+                comments: req.body.comments,
+                symptoms: req.body.symptoms
             })
-
-            newVaccination.regDate = setdate1(newVaccination.date);
 
             try{
                 newVaccination.save().then(vaccination => res.json(vaccination));
