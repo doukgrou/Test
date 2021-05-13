@@ -54,8 +54,8 @@ module.exports = function validateAppointmentInput(data) {
     if (Validator.isEmpty(data.dateDose1)) {
         errors.dateDose1 = "Date of dose one field is required";
     }
-    if (Validator.isEmpty(data.dateDose1)) {
-        errors.dateDose1 = "Date of dose two field is required";
+    if (Validator.isEmpty(data.dateDose2)) {
+        errors.dateDose2 = "Date of dose two field is required";
     }
 
     //Address checks
