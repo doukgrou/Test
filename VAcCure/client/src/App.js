@@ -10,8 +10,8 @@ import store from "./store";
 import Navbar from "./components/layout/Navbar";
 import Landing from "./components/layout/Landing";
 import Register from "./components/auth/Register";
+import NewAppointment from "./components/vaccine/newAppointment";
 import Login from "./components/auth/Login";
-import NewAppointment from "./vaccine/newAppointment";
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
 
@@ -46,7 +46,7 @@ class App extends Component {
             <Route exact path="/" component={Landing} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
-            <Route exact path="/newAppointmet" component={NewAppointment} />
+            <Route exact path="/newAppointment" component={NewAppointment} />
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
             </Switch>
