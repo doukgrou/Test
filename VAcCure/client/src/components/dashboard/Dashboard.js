@@ -1,295 +1,313 @@
 import React, { Component } from "react";
+import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { logoutUser } from "../../actions/authActions";
-import { Link } from 'react-router-dom';
+import { newAppointment } from "../../actions/appointmentActions";
+import classnames from "classnames";
 
-class Dashboard extends Component {
-  onLogoutClick = e => {
+class NewAppointment extends Component {
+  constructor() {
+    super();
+    this.state = {
+      firstName: "",
+      lastName : "",
+      amka : "",
+      dateOfBirth : "",
+      address : "",
+      dateDose1: "",
+      dateDose2: "",
+      vaccineBrand: "",
+      password2: "",
+      isDoseOneCompleted: "",
+      isDoseTwoCompleted: "",
+      symptoms: "",
+      comments: "",
+      errors: {}
+    };
+  }
+
+  componentDidMount() {
+    // If logged in and user navigates to Register page, should redirect them to dashboard
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push("/newAppointment");
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({
+        errors: nextProps.errors
+      });
+    }
+  }
+
+  onChange = e => {
+    this.setState({ [e.target.id]: e.target.value });
+  };
+
+  onSubmit = e => {
     e.preventDefault();
-    this.props.logoutUser();
+
+    const newVaccination = {
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      amka: this.state.amka, 
+      dateOfBirth: this.state.dateOfBirth, 
+      address: this.state.address,
+      dateDose1: this.state.dateDose1,
+      dateDose2: this.state.dateDose2,
+      vaccineBrand: this.state.vaccineBrand,
+      symptoms: this.state.symptoms,
+      comments: this.state.comments
+      
+    };
+
+    this.props.newAppointment(newVaccination, this.props.history);
   };
 
   render() {
-    const { user } = this.props.auth;
+    const { errors } = this.state;
 
     return (
-      <div  className="container valign-wrapper" style={{width:"100%", display: "flex"}}>
+      <div className="container">
         <div className="row">
-        <div class="left">
-        <div className="col s12" style={{background:"#54B8C5",right:"0",left:"0",width: "1440px", height:"130px"}}>
-        <div class="center">
-          <br />
-          <b style={{size: "30rem", width:"200rem"}}>Hospital Name:</b>            {user.hospitalName.split()}<br /> 
-          <b style={{size: "30rem", width:"200rem"}}>The hospital is placed at: </b>{user.address.split()}   
-                                            , {user.city.split()}    
-                                            , {user.country.split()}<br />
-          <b style={{size: "30rem", width:"200rem"}}>Phone:</b>                    {user.phone.split()}<br /> 
-          <b style={{size: "30rem", width:"200rem"}}>email:</b>                    {user.email.split()}<br /> 
-
-          
-            <br />
-        </div>
-        </div>
-        <div>
-        </div>
-        <div class="container">
-        <div class="table-responsive">
-            <div class="table-wrapper">
-                <div class="table-title">
-                    <div class="row">
-                    <hr></hr>
-            <p>
-            <br /> 
-          <br />
-          <br /> 
-          <br /> 
-          
-          <div class="left" style={{width:"200rem"}}>
-              <h6><b>Number of Vaccines for the day:</b> 1300</h6> 
-              <br />
-              <h6><b>Number of Vaccines for the week:</b> 150</h6>
-              <br />
-          </div>
-            </p>
-          
-                        <div class="col-sm-8">
-                          <div class="center">
-                          <br />
-          <br /> 
-          <br /> 
-          <br />
-          <br />
-                          <h5>Vaccination appointments</h5>
-                          </div>
-                        </div>
-                        <div class="col-sm-4 left-align">
-                            <div class="search-box ">
-                              <div class="left">
-         
-          
-                                
-
-                                <input type="text" class="form-control" placeholder="Search&hellip;"/></div>
-                        </div>
-                    </div>
-                </div>
-                </div>
-                <div class="left">
-                <table class="table table-striped table-hover table-bordered" style={{background:"#D9F2F8",width:"1000px",height:"708px"}}>
-                  
-                    <thead>
-                        <tr>
-        <th width="200rem"> No:</th>
-        <th width="500rem">Name</th>
-        <th width="500rem">AMKA</th>
-        <th width="500rem">Age</th>
-        
-        <th width="500rem">Stage </th>
-        <th width="200rem">Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>1</td>
-        <td>Lora Smith</td>
-        <td>6887</td>
-        <td>60</td>
-        <td>Semicompleted</td>
-        <td>
-                                <a href="#" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-        </td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>Christine Edward</td>
-        <td>4787</td>
-        <td>70</td>
-        <td>Completed</td>
-        <td>
-        <a href="#" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-        </td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>John Lewis</td>
-        <td>5767</td>
-        <td>50</td>
-        <td>Uncompleted</td>
-        <td>
-        <a href="#" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-        </td>
-      </tr>
-      <tr>
-        <td>4</td>
-        <td>John Lewis</td>
-        <td>5767</td>
-        <td>50</td>
-        <td>Uncompleted</td>
-        <td>
-        <a href="#" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-        </td>
-      </tr>
-      <tr>
-        <td>4</td>
-        <td>John Lewis</td>
-        <td>5767</td>
-        <td>50</td>
-        <td>Uncompleted</td>
-        <td>
-        <a href="#" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-        </td>
-      </tr>
-      <tr>
-        <td>4</td>
-        <td>John Lewis</td>
-        <td>5767</td>
-        <td>50</td>
-        <td>Uncompleted</td>
-        <td>
-        <a href="#" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-        </td>
-      </tr>
-      <tr>
-        <td>4</td>
-        <td>John Lewis</td>
-        <td>5767</td>
-        <td>50</td>
-        <td>Uncompleted</td>
-        <td>
-        <a href="#" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-        </td>
-      </tr>
-      <tr>
-        <td>4</td>
-        <td>John Lewis</td>
-        <td>5767</td>
-        <td>50</td>
-        <td>Uncompleted</td>
-        <td>
-        <a href="#" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  </div>
-  <div class="clearfix">
-                    <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-                    <ul class="pagination">
-                        <li class="page-item disabled"><a href="#"><i class="fa fa-angle-double-left"></i></a></li>
-                        <li class="page-item"><a href="#" class="page-link">1</a></li>
-                        <li class="page-item"><a href="#" class="page-link">2</a></li>
-                        <li class="page-item active"><a href="#" class="page-link">3</a></li>
-                        <li class="page-item"><a href="#" class="page-link">4</a></li>
-                        <li class="page-item"><a href="#" class="page-link">5</a></li>
-                        <li class="page-item"><a href="#" class="page-link"><i class="fa fa-angle-double-right"></i></a></li>
-                    </ul>
-                </div> 
-      
-                  </div>
+          <div className="col s8 offset-s2">
+            <Link to="/" className="btn-flat waves-effect">
+              <i className="material-icons left">keyboard_backspace</i> Back to
+              home
+            </Link>
+            <div className="col s12" style={{ paddingLeft: "11.250px" }}>
+              <h4>
+                <b>Insert New Appointment</b> below
+              </h4>
+              <br></br>
+              <br></br>
+              <p className="black-text text-darken-1"style={{ paddingLeft: "8.5rem" }}>
+                <b>Citizen's card: </b>
+              </p>
             </div>
-        </div>        
-    </div>  
-    <div className="col s6">
-              <Link
-                to="/newAppointment"
-                style={{
-                  width: "250px",
-                  borderRadius: "3px",
-                  letterSpacing: "1.5px",
-                  marginLeft: "10rem",
-                  marginTop: "1rem"
-                }}
-                className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-              >
-                New Appointment
-              </Link>
+          <form noValidate onSubmit={this.onSubmit}>
+            <div className="col s8 offset-s2" style={{ backgroundColor: "#D9F2F8", width: "500px"}}>
+              <div className="input-field col s12">
+                <input
+                  onChange={this.onChange}
+                  value={this.state.firstName}
+                  error={errors.firstName}
+                  id="firstName"
+                  type="text"
+                  className={classnames("", {
+                    invalid: errors.firstName
+                  })}
+                />
+                <label htmlFor="firstName"><b className="black-text text-darken-1">First Name</b></label>
+                <span className="red-text">{errors.firstName}</span>
+              </div>
+              <div className="input-field col s12">
+                <input
+                  onChange={this.onChange}
+                  value={this.state.lastName}
+                  error={errors.lastName}
+                  id="lastName"
+                  type="text"
+                  className={classnames("", {
+                    invalid: errors.lastName
+                  })}
+                />
+                <label htmlFor="lastName"><b className="black-text text-darken-1">Last Name</b></label>
+                <span className="red-text">{errors.lastName}</span>
+              </div>
+              <div className="input-field col s12">
+                <input
+                  onChange={this.onChange}
+                  value={this.state.amka}
+                  error={errors.amka}
+                  id="amka"
+                  type="text"
+                  className={classnames("", {
+                    invalid: errors.amka
+                  })}
+                />
+                <label htmlFor="amka"><b className="black-text text-darken-1">AMKA:</b></label>
+                <span className="red-text">{errors.amka}</span>
+              </div>
+              <div className="input-field col s12">
+                <input
+                  onChange={this.onChange}
+                  value={this.state.dateOfBirth}
+                  error={errors.dateOfBirth}
+                  id="dateOfBirth"
+                  type="date"
+                  className={classnames("", {
+                    invalid: errors.dateOfBirth
+                  })}
+                />
+                <label htmlFor="dateOfBirth"><b className="black-text text-darken-1">Date of Birth</b></label>
+                <span className="red-text">{errors.dateOfBirth}</span>
+              </div>
+              <div className="input-field col s12">
+                <input
+                  onChange={this.onChange}
+                  value={this.state.address}
+                  error={errors.address}
+                  id="address"
+                  type="text"
+                  className={classnames("", {
+                    invalid: errors.address
+                  })}
+                />
+                <label htmlFor="address"><b className="black-text text-darken-1">Full Address</b></label>
+                <span className="red-text">{errors.address}</span>
+              </div>
+              <div className="input-field col s12">
+                <input
+                  onChange={this.onChange}
+                  value={this.state.dateDose1}
+                  error={errors.dateDose1}
+                  id="dateDose1"
+                  type="date"
+                  className={classnames("", {
+                    invalid: errors.dateDose1
+                  })}
+                />
+                <label htmlFor="dateDose1"><b className="black-text text-darken-1">Date of Dose-1</b></label>
+                <span className="red-text">{errors.dateDose1}</span>
+              </div>
+              <div className="input-field col s12">
+                <input
+                  onChange={this.onChange}
+                  value={this.state.dateDose2}
+                  error={errors.dateDose2}
+                  id="dateDose2"
+                  type="date"
+                  className={classnames("", {
+                    invalid: errors.dateDose2
+                  })}
+                />
+                <label htmlFor="dateDose2"><b className="black-text text-darken-1"><b className="black-text text-darken-1">Date of Dose-2</b></b></label>
+                <span className="red-text">{errors.dateDose2}</span>
+                <hr  style={{
+                 width: "455px",
+                 borderColor: "black",
+
+                 backgroundColor: "black",
+                 marginRight: "7rem",
+                 marginTop: "2rem"
+                  }}>           
+                </hr>
+              </div>
+              
+              <div className="input-field col s12">
+                <input
+                  onChange={this.onChange}
+                  value={this.state.vaccineBrand}
+                  error={errors.vaccineBrand}
+                  id="vaccineBrand"
+                  type="text"
+                  className={classnames("", {
+                    invalid: errors.vaccineBrand
+                  })}
+                />
+                <label htmlFor="vaccineBrand"><b><b className="black-text text-darken-1">Vaccine's Brand</b></b></label>
+                <span className="red-text">{errors.vaccineBrand}</span>
+                <hr  style={{
+                 width: "455px",
+                 borderColor: "black",
+
+                 backgroundColor: "black",
+                 marginRight: "7rem",
+                 marginTop: "3rem"
+                  }}>           
+                </hr>
+                <br></br>
+                <span><b><b className="black-text text-darken-1">Dose1: </b></b></span>
+                <br></br>
+                <br></br>
+                <span><b><b className="black-text text-darken-1">Dose2: </b></b></span>
+                <hr  style={{
+                 width: "455px",
+                 borderColor: "light-grey",
+
+                 backgroundColor: "black",
+                 marginRight: "7rem",
+                 marginTop: "2rem"
+                  }}>           
+                </hr>
+              </div>
+              <span><b><b className="black-text text-darken-1">Symptoms: </b></b></span> 
+               <textarea  name="symptoms" id="symptoms" value={this.state.symptoms} onChange={this.onChange}
+                          style={{ backgroundColor: "white", width: "370px", height: "130px", marginLeft: "6rem"}}>
+               </textarea>
+
+                <hr  style={{
+                 width: "455px",
+                 borderColor: "light-grey",
+
+                 backgroundColor: "black",
+                 marginRight: "7rem",
+                 marginTop: "2rem"
+                  }}>           
+                </hr>
+              
+               <span><b><b className="black-text text-darken-1">Comments: </b></b></span> 
+               <textarea  name="coments" id="comments" value={this.state.comments} onChange={this.onChange}
+                          style={{ backgroundColor: "white", width: "370px", height: "130px", marginLeft: "6rem"}}>
+                 
+               </textarea>
+
+               <hr  style={{
+                 width: "455px",
+                 borderColor: "light-grey",
+
+                 backgroundColor: "black",
+                 marginRight: "7rem",
+                 marginTop: "2rem"
+                  }}>           
+                </hr>
+
+                <span><b><b className="black-text text-darken-1">Stage of Vaccination: </b></b></span> 
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+              
+              
+              <div className="col s12" style={{ paddingLeft: "330px" }}>
+                <button
+                  style={{
+                    width: "150px",
+                    borderRadius: "3px",
+                    letterSpacing: "1.5px",
+                    marginTop: "2rem"
+                  }}
+                  type="submit"
+                  className="btn btn-large waves-effect waves-light hoverable marine accent-3"
+                >
+                  SUBMIT
+                </button>
+                <br></br>
+                <br></br>
+              </div>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
-<div class="center">
-            <button
-              style={{
-                width: "200px",
-                borderRadius: "3px",
-                letterSpacing: "1.5px",
-                bottom: "0",
-                left:"27rem",
-                margin: "auto",
-                display:"inline"
-              }}
-              onClick={this.onLogoutClick}
-              className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-            >
-              Logout
-            </button>
-            </div>
-            
-
-            <footer
-          style={{position: "fixed",
-            bottom: "0",
-            left: "0",
-            width: "100%",
-            height: "100px",
-            padding: "0 5px",
-            display: "flex",
-            items: "center",
-            background: "#FFFFFF"
-          }}>
-                 <div class="container footer">
-                   <div class="right">
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="row">
-                <div class="col-sm-9">
-                    <div class="row">
-                        <div class="col-sm-16 footer__contact-us">
-                            Contact us: 2310323988
-                        </div>
-                        <div class="col-sm-16">
-                            Email: info@vaccure.com
-                        </div>
-                        <div class="col-sm-12 footer__links">
-             <a href="terms">Terms of Use</a> | <a href="privacy">Privacy Policy</a>
-        </div>
-        <div class="col-sm-12 footer__copyright">(c) VAcCure. All rights reserved</div>
-                    </div>
-                </div>
-               
-            </div>
-        </div>
-    </div>
-   
-   
-</div>
-
-</div>
-    </footer>
-          </div>
-          
-        </div>
-
     );
   }
 }
 
-Dashboard.propTypes = {
-  logoutUser: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired
+NewAppointment.propTypes = {
+  newApoointmet: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  errors: state.errors
 });
 
 export default connect(
   mapStateToProps,
-  { logoutUser }
-)(Dashboard);
+  { newAppointment }
+)(withRouter(NewAppointment));
