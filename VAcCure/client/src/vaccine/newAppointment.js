@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { registerUser } from "../../actions/authActions";
+import { newAppointment } from "../actions/authActions";
 import classnames from "classnames";
 
-class Register extends Component {
+class NewAppointment extends Component {
   constructor() {
     super();
     this.state = {
@@ -27,7 +27,7 @@ class Register extends Component {
   componentDidMount() {
     // If logged in and user navigates to Register page, should redirect them to dashboard
     if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/dashboard");
+      this.props.history.push("/newAppointment");
     }
   }
 
@@ -290,8 +290,8 @@ class Register extends Component {
   }
 }
 
-Register.propTypes = {
-  registerUser: PropTypes.func.isRequired,
+NewAppointment.propTypes = {
+  newApoointmet: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
 };
@@ -303,5 +303,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { registerUser }
-)(withRouter(Register));
+  { newAppointment }
+)(withRouter(NewAppointment));
