@@ -120,4 +120,5 @@ router.get("/appointments", (req, res) => {
 
 });
 
+
 module.exports = router;
