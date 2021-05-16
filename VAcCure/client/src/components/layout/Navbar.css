@@ -1,17 +1,17 @@
-#logo{
+  #logo{
     padding: 1000px 10;
     box-align: left;
-}
+  }
 
-.navbr {
+  .navbar {
     background-color: #D9F2F8;
     position: sticky;
-    width:100%;
-    height:56px;
-   line-height:56px;
+    width: 100%;
+    height: 56px;
+    line-height: 56px;
    }
 
-   ul {
+  #test {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -21,7 +21,7 @@
     width: 100%;
   }
   
-  li {
+  #test1 {
     float: left
   }
 
